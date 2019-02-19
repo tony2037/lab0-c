@@ -55,7 +55,10 @@ bool q_insert_head(queue_t *q, char *s)
         return false;
     list_ele_t *newh;
     /* What should you do if the q is NULL? */
-    newh = malloc(sizeof(list_ele_t));
+    if (NULL == newh = malloc(sizeof(list_ele_t))) {
+        printf("Allocate failed\n");
+        return false;
+    }
     /* Don't forget to allocate space for the string and copy it */
     /* What if either call to malloc returns NULL? */
     newh->next = q->head;
