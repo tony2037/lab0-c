@@ -30,6 +30,7 @@ typedef struct {
                         You will need to add more fields to this structure
                         to efficiently implement q_size and q_insert_tail
                       */
+    int size;         // Add this variable to keep size
 } queue_t;
 
 /************** Operations on queue ************************/
