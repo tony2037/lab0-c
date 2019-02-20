@@ -30,6 +30,7 @@ queue_t *q_new()
         return NULL;
     memset(q, 0, sizeof(queue_t));
     q->head = NULL;
+    q->tail = NULL;
     q->size = 0;
     return q;
 }
@@ -81,6 +82,7 @@ bool q_insert_head(queue_t *q, char *s)
     if (q->head == NULL) {
         newh->next = NULL;
         q->head = newh;
+        q->tail = newh;
         q->size++;
         return true;
     }
@@ -103,7 +105,36 @@ bool q_insert_tail(queue_t *q, char *s)
 {
     /* You need to write the complete code for this function */
     /* Remember: It should operate in O(1) time */
-    return false;
+    if (q == NULL) {
+        return false;
+    }
+    list_ele_t *newh;
+    newh = malloc(sizeof(list_ele_t));
+    if (newh == NULL) {
+        return false;
+    }
+    memset(newh, 0, sizeof(list_ele_t));
+    newh->value = malloc(sizeof(char) * strlen(s) + 1);
+    if (newh->value == NULL) {
+        free(newh);
+        return false;
+    }
+    memset(newh->value, 0, sizeof(char) * strlen(s) + 1);
+    strcpy(newh->value, s);
+    if (q->head == NULL) {
+        /* This implies that the queue is empty */
+        newh->next = NULL;
+        q->head = newh;
+        q->tail = newh;
+        q->size++;
+        return true;
+    }
+
+    newh->next = NULL;
+    q->tail->next = newh;
+    q->tail = newh;
+    q->size++;
+    return true;
 }
 
 /*
