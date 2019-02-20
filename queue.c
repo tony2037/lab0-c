@@ -78,7 +78,7 @@ bool q_insert_head(queue_t *q, char *s)
     memset(newh->value, 0, sizeof(char) * strlen(s) + 1);
     strcpy(newh->value, s);
 
-    if (q->size == 0) {
+    if (q->head == NULL) {
         newh->next = NULL;
         q->head = newh;
         q->size++;
@@ -117,7 +117,15 @@ bool q_insert_tail(queue_t *q, char *s)
 bool q_remove_head(queue_t *q, char *sp, size_t bufsize)
 {
     /* You need to fix up this code. */
+    if (q == NULL) {
+        return false;
+    }
+    if (q->size == 0) {
+        /* empty queue */
+        return false;
+    }
     q->head = q->head->next;
+    q->size--;
     return true;
 }
 
