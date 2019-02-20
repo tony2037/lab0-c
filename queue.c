@@ -47,7 +47,9 @@ void q_free(queue_t *q)
     list_ele_t *tmp = q->head;
     list_ele_t *prev = q->head;
     while (tmp != NULL) {
-        free(tmp->value);
+        if (tmp->value != NULL) {
+            free(tmp->value);
+        }
         prev = tmp;
         tmp = tmp->next;
         free(prev);
@@ -86,7 +88,7 @@ bool q_insert_head(queue_t *q, char *s)
     memset(newh->value, 0, sizeof(char) * strlen(s) + 1);
     strcpy(newh->value, s);
 
-    if (q->head == NULL) {
+    if (q->size == 0) {
         newh->next = NULL;
         q->head = newh;
         q->tail = newh;
@@ -128,13 +130,12 @@ bool q_insert_tail(queue_t *q, char *s)
     }
     memset(newh->value, 0, sizeof(char) * strlen(s) + 1);
     strcpy(newh->value, s);
-    if (q->head == NULL) {
+    if (q->size == 0) {
         /* This implies that the queue is empty */
         newh->next = NULL;
         q->head = newh;
         q->tail = newh;
         q->size++;
-        assert(q->size == 1);
         return true;
     }
 
@@ -160,15 +161,12 @@ bool q_remove_head(queue_t *q, char *sp, size_t bufsize)
         return false;
     }
     if (q->head == NULL) {
-        /* empty queue */
-        assert(q->size == 0);
         return false;
     }
+
     if (sp != NULL) {
-        memset(sp, (int) '\00', bufsize);
-        (strlen(q->head->value) > bufsize - 1)
-            ? strncpy(sp, q->head->value, bufsize - 1)
-            : strncpy(sp, q->head->value, strlen(q->head->value));
+        memset(sp, (int) '\0', bufsize);
+        strncpy(sp, q->head->value, bufsize - 1);
     }
     list_ele_t *tmp = q->head;
     q->head = q->head->next;
@@ -186,6 +184,12 @@ int q_size(queue_t *q)
 {
     /* You need to write the code for this function */
     /* Remember: It should operate in O(1) time */
+    if (q == NULL) {
+        return 0;
+    }
+    if (q->head == NULL) {
+        return 0;
+    }
     return q->size;
 }
 
@@ -199,4 +203,16 @@ int q_size(queue_t *q)
 void q_reverse(queue_t *q)
 {
     /* You need to write the code for this function */
+    if (q != NULL && q->head != NULL && q->head->next != NULL) {
+        list_ele_t *cur = q->head->next;
+        list_ele_t *prec;
+        q->tail = q->head;
+        while (cur != NULL) {
+            prec = cur->next;
+            cur->next = q->head;
+            q->head = cur;
+            cur = prec;
+        }
+        q->tail->next = NULL;
+    }
 }
