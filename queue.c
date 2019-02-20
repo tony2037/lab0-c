@@ -124,7 +124,13 @@ bool q_remove_head(queue_t *q, char *sp, size_t bufsize)
         /* empty queue */
         return false;
     }
+    if (sp != NULL) {
+        strcpy(sp, q->head->value);
+    }
+    list_ele_t *tmp = q->head;
     q->head = q->head->next;
+    free(tmp->value);
+    free(tmp);
     q->size--;
     return true;
 }
