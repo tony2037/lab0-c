@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 
 #include "harness.h"
 #include "queue.h"
@@ -127,6 +128,7 @@ bool q_insert_tail(queue_t *q, char *s)
         q->head = newh;
         q->tail = newh;
         q->size++;
+        assert(q->size == 1);
         return true;
     }
 
