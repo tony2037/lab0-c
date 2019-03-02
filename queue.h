@@ -90,3 +90,12 @@ int q_size(queue_t *q);
   It should rearrange the existing ones.
  */
 void q_reverse(queue_t *q);
+
+/*
+ * sortedlist_splice - given two sorted queue, merge them together.
+ * @a: pointer to the first sorted queue
+ * @b: pointer to the second sorted queue
+ *
+ * Return: pointer to queue that complete merging of two queues.
+*/
+queue_t *sortedlist_splice(queue_t *a, queue_t *b);
