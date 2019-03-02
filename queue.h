@@ -98,4 +98,4 @@ void q_reverse(queue_t *q);
  *
  * Return: pointer to queue that complete merging of two queues.
 */
-queue_t *sortedlist_splice(queue_t *a, queue_t *b);
+queue_t *sortedqueue_splice(queue_t *a, queue_t *b);
