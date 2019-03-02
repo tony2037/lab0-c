@@ -216,3 +216,55 @@ void q_reverse(queue_t *q)
         q->tail->next = NULL;
     }
 }
+
+/*
+ * Assume the two given queues have been sorted.
+*/
+queue_t *sortedqueue_splice(queue_t *a, queue_t *b)
+{
+    if (a == NULL) {
+        return b;
+    }
+    if (b == NULL) {
+        return a;
+    }
+
+    queue_t *new_h = q_new();
+    list_ele_t *ptr_a = a->head;
+    list_ele_t *ptr_b = b->head;
+    while (1) {
+        int cmp = strcmp(ptr_a->value, ptr_b->value);
+        if (cmp < 0) {
+            q_insert_tail(new_h, ptr_a->value);
+            ptr_a = ptr_a->next;
+        } else if (cmp == 0) {
+            q_insert_tail(new_h, ptr_a->value);
+            q_insert_tail(new_h, ptr_b->value);
+            ptr_a = ptr_a->next;
+            ptr_b = ptr_b->next;
+        } else if (cmp > 0) {
+            q_insert_tail(new_h, ptr_b->value);
+            ptr_b = ptr_b->next;
+        }
+
+        if (!ptr_a) {
+            /* Now queue a should be done. */
+            while (ptr_b) {
+                q_insert_tail(new_h, ptr_b->value);
+                ptr_b = ptr_b->next;
+            }
+            break;
+        }
+
+        if (!ptr_b) {
+            /* Now queue b should be done. */
+            while (ptr_a) {
+                q_insert_tail(new_h, ptr_a->value);
+                ptr_a = ptr_a->next;
+            }
+            break;
+        }
+    }
+
+    return new_h;
+}
