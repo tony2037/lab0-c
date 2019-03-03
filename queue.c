@@ -285,4 +285,33 @@ void merge_sort(queue_t *q)
 */
 void q_split_half(queue_t *q, queue_t *a, queue_t *b)
 {
+    if (q == NULL) {
+        a = NULL;
+        b = NULL;
+        return;
+    }
+    if (q->size == 1) {
+        a = NULL;
+        b = NULL;
+        return;
+    }
+    int split_point = q->size / 2;
+    list_ele_t *sp; /* Stand for split point*/
+    sp = q->head;
+    a = q_new();
+    b = q_new();
+    while (split_point--) {
+        sp = sp->next;
+    }
+    list_ele_t *ptr;
+    ptr = q->head;
+    while (ptr != sp) {
+        q_insert_tail(b, ptr->value);
+        ptr = ptr->next;
+    }
+    while (ptr != NULL) {
+        q_insert_tail(a, ptr->value);
+        ptr = ptr->next;
+    }
+
 }
