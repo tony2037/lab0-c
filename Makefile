@@ -3,7 +3,8 @@ CFLAGS = -O0 -g -Wall -Werror
 
 TESTS = \
 	sortedqueue_splice \
-	q_split_half
+	q_split_half \
+	merge_sort
 
 TESTS := $(addprefix tests/,$(TESTS))
 
