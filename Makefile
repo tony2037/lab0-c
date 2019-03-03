@@ -2,7 +2,8 @@ CC = gcc
 CFLAGS = -O0 -g -Wall -Werror
 
 TESTS = \
-	sortedqueue_splice
+	sortedqueue_splice \
+	q_split_half
 
 TESTS := $(addprefix tests/,$(TESTS))
 
@@ -22,8 +23,8 @@ qtest: qtest.c report.c console.c harness.c queue.o
 test: qtest scripts/driver.py
 	scripts/driver.py
 
-$(TESTS): $(TESTS).c report.c console.c harness.c queue.o
-	$(CC) $(CFLAGS) -I./ -o $@.test $< report.c console.c harness.c queue.o
+$(TESTS): report.c console.c harness.c queue.o
+	$(CC) $(CFLAGS) -I./ -o $@.test $@.c report.c console.c harness.c queue.o
 
 clean:
 	rm -f *.o *~ qtest 
