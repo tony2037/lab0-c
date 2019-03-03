@@ -1,8 +1,9 @@
 CC = gcc
 CFLAGS = -O0 -g -Wall -Werror
+CFLAGS += -I./
 
 TESTS = \
-	mergesort
+	merge_sort
 
 TESTS := $(addprefix tests/,$(TESTS))
 
