@@ -272,3 +272,10 @@ queue_t *sortedqueue_splice(queue_t *a, queue_t *b)
 
     return new_h;
 }
+
+/*
+ * Using merge sorting algorithm to sort the given queue
+*/
+void merge_sort(queue_t *q)
+{
+}
