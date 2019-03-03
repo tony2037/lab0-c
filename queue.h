@@ -104,9 +104,9 @@ queue_t *sortedqueue_splice(queue_t *a, queue_t *b);
 /*
  * merge_sort - given a queue, sort it with merge sortint algorithm
  * @q: pointer to queue to be sorted
- * Return: void
+ * Return: A sorted queue
 */
-void merge_sort(queue_t *q);
+queue_t *merge_sort(queue_t *q);
 
 /*
  * q_split_half - split the given queue into two queues at the middle
