@@ -12,10 +12,10 @@ int main(void)
     a = q_new();
     b = q_new();
     q_insert_tail(a, "a");
-    q_insert_tail(a, "b");
     q_insert_tail(a, "c");
+    q_insert_tail(a, "e");
+    q_insert_tail(b, "b");
     q_insert_tail(b, "d");
-    q_insert_tail(b, "e");
     q_insert_tail(b, "f");
     q_insert_tail(b, "g");
     queue_t *r;
