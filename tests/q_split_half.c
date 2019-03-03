@@ -17,8 +17,8 @@ int main(void)
     q_insert_tail(q, "e");
     q_split_half(q, a, b);
     assert(q->size == 5);
-    assert(a->size == 3);
-    assert(b->size == (q->size / 2));
+    assert(b->size == 3);
+    assert(a->size == (q->size / 2));
     list_ele_t *ptr;
     ptr = q->head;
     printf("q: ===============\n");
