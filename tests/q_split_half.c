@@ -21,16 +21,19 @@ int main(void)
     assert(b->size == (q->size / 2));
     list_ele_t *ptr;
     ptr = q->head;
+    printf("q: ===============\n");
     while (ptr != NULL) {
         printf("%s\n", ptr->value);
         ptr = ptr->next;
     }
     ptr = a->head;
+    printf("a: ===============\n");
     while (ptr != NULL) {
         printf("%s\n", ptr->value);
         ptr = ptr->next;
     }
     ptr = b->head;
+    printf("b: ===============\n");
     while (ptr != NULL) {
         printf("%s\n", ptr->value);
         ptr = ptr->next;
