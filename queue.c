@@ -278,6 +278,19 @@ queue_t *sortedqueue_splice(queue_t *a, queue_t *b)
 */
 void merge_sort(queue_t *q)
 {
+    queue_t *ptr;
+    ptr = q;
+    if (q == NULL)
+        return;
+    if (q->size == 0 || q->size == 1)
+        return;
+    queue_t *a, *b;
+    a = q_new();
+    b = q_new();
+    q_split_half(ptr, a, b);
+    merge_sort(a);
+    merge_sort(b);
+    ptr = sortedqueue_splice(a, b);
 }
 
 /*
