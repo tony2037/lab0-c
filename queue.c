@@ -282,6 +282,7 @@ void merge_sort(queue_t *q)
 
 /*
  * Split the given queue at the middle into two queues
+ * Assume a & b should be initialized already.
 */
 void q_split_half(queue_t *q, queue_t *a, queue_t *b)
 {
@@ -295,22 +296,27 @@ void q_split_half(queue_t *q, queue_t *a, queue_t *b)
         b = NULL;
         return;
     }
+    if (a == NULL || b == NULL || a->size != 0 || b->size != 0) {
+        q_free(a);
+        q_free(b);
+        a = NULL;
+        b = NULL;
+        return;
+    }
     int split_point = q->size / 2;
     list_ele_t *sp; /* Stand for split point*/
     sp = q->head;
-    a = q_new();
-    b = q_new();
     while (split_point--) {
         sp = sp->next;
     }
     list_ele_t *ptr;
     ptr = q->head;
     while (ptr != sp) {
-        q_insert_tail(b, ptr->value);
+        q_insert_tail(a, ptr->value);
         ptr = ptr->next;
     }
     while (ptr != NULL) {
-        q_insert_tail(a, ptr->value);
+        q_insert_tail(b, ptr->value);
         ptr = ptr->next;
     }
 
