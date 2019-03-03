@@ -100,3 +100,10 @@ void q_reverse(queue_t *q);
  * Return: pointer to queue that complete merging of two queues.
 */
 queue_t *sortedqueue_splice(queue_t *a, queue_t *b);
+
+/*
+ * merge_sort - given a queue, sort it with merge sortint algorithm
+ * @q: pointer to queue to be sorted
+ * Return: void
+*/
+void merge_sort(queue_t *q);
