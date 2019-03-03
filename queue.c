@@ -278,38 +278,18 @@ queue_t *sortedqueue_splice(queue_t *a, queue_t *b)
 */
 queue_t *merge_sort(queue_t *q)
 {
-    // list_ele_t *k;
     queue_t *ptr;
     ptr = q;
     if (q == NULL)
-        return;
+        return NULL;
     if (q->size == 0 || q->size == 1)
-        return;
-    /*
-    k = ptr->head;
-    while(k != NULL) {
-        printf("Q%s\n", k->value);
-        k = k->next;
-    }
-    */
+        return q;
     queue_t *a, *b;
     a = q_new();
     b = q_new();
     q_split_half(ptr, a, b);
-    /*
-    k = a->head;
-    while(k != NULL) {
-        printf("A%s\n", k->value);
-        k = k->next;
-    }
-    k = b->head;
-    while(k != NULL) {
-        printf("A%s\n", k->value);
-        k = k->next;
-    }
-    */
-    merge_sort(a);
-    merge_sort(b);
+    a = merge_sort(a);
+    b = merge_sort(b);
     return sortedqueue_splice(a, b);
 }
 
