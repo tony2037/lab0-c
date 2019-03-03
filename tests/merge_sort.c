@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <stdio.h>
 
 #include "queue.h"
 
@@ -18,10 +19,12 @@ int main(void)
     q_insert_tail(b, "g");
     queue_t *r;
     r = sortedqueue_splice(a, b);
-    list_ele_t ptr = r->head;
-    int should_be = (int) "a";
+    list_ele_t *ptr;
+    ptr = r->head;
+    int should_be = (int) *"a";
     while (ptr != NULL) {
         assert((int) (ptr->value[0]) == should_be);
+        printf("%s\n", ptr->value);
         ptr = ptr->next;
         should_be++;
     }
