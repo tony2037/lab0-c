@@ -249,19 +249,23 @@ queue_t *sortedqueue_splice(queue_t *a, queue_t *b)
 
         if (!ptr_a) {
             /* Now queue a should be done. */
+            q_free(a);
             while (ptr_b) {
                 q_insert_tail(new_h, ptr_b->value);
                 ptr_b = ptr_b->next;
             }
+            q_free(b);
             break;
         }
 
         if (!ptr_b) {
+            q_free(b);
             /* Now queue b should be done. */
             while (ptr_a) {
                 q_insert_tail(new_h, ptr_a->value);
                 ptr_a = ptr_a->next;
             }
+            q_free(a);
             break;
         }
     }

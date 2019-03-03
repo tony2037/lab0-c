@@ -1,6 +1,11 @@
 CC = gcc
 CFLAGS = -O0 -g -Wall -Werror
 
+TESTS = \
+	mergesort
+
+TESTS := $(addprefix tests/,$(TESTS))
+
 GIT_HOOKS := .git/hooks/applied
 all: $(GIT_HOOKS) qtest
 
@@ -16,6 +21,9 @@ qtest: qtest.c report.c console.c harness.c queue.o
 
 test: qtest scripts/driver.py
 	scripts/driver.py
+
+$(TESTS): $(TESTS).c
+	$(CC) $(CFLAGS) -o $@ $<
 
 clean:
 	rm -f *.o *~ qtest 
