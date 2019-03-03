@@ -107,3 +107,12 @@ queue_t *sortedqueue_splice(queue_t *a, queue_t *b);
  * Return: void
 */
 void merge_sort(queue_t *q);
+
+/*
+ * q_split_half - split the given queue into two queues at the middle
+ * @q: pointer to queue to be splited
+ * @a: pointer to the front queue
+ * @b: pointer to the later queue
+ * Return: void
+*/
+void q_split_half(queue_t *q, queue_t *a, queue_t *b);
